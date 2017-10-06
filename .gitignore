@@ -1,0 +1,5 @@
+class/*.so
+class/*.d
+class/*.o
+class/.lib*
+class/*.pcm
