@@ -12,7 +12,9 @@ Instruction for macros and parameter files to analyze BigRIPS detectors of the S
 
 **macros_3/** : Macros to reconstruct beta and A/Q using ANAROOT beam information classes, and to calibrate ion chamber energy deposit.
 
-You can get more detail information when you enter in those directories.
+**macros_basic/** : Macros to check raw data from ridf data file. 
+
+**runinfo/** : List of run mainly on useless data
 
 ## Rough Analysis Flow
 1. Decode the ridf-format files into TTree with raw data containers of TClonesArray.
@@ -23,4 +25,3 @@ So, you can follow the analysis by looking through each directory like, macros_1
 
 ### As a preparation...
 Please setup the ANAROOT environment in your analysis server.
-ok
