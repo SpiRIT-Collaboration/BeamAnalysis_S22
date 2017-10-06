@@ -2,8 +2,6 @@ rootfiles
 src
 ridf
 matrix
-macros_2
-macros_3
 
 *.root
 *.so
