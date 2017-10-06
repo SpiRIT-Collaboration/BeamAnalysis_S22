@@ -23,4 +23,3 @@ So, you can follow the analysis by looking through each directory like, macros_1
 
 ### As a preparation...
 Please setup the ANAROOT environment in your analysis server.
-ok
