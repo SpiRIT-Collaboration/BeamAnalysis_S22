@@ -3,3 +3,15 @@ class/*.d
 class/*.o
 class/.lib*
 class/*.pcm
+
+
+rootfiles
+src
+db
+runinfo
+ridf
+matrix
+macros_1
+macros_2
+macros_3
+
