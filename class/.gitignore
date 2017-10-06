@@ -2,4 +2,4 @@
 *.o
 *.d
 *.pcm
-*.lib
+.lib*
