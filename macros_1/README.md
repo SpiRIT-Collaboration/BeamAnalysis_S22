@@ -3,9 +3,11 @@ First step of the analysis.
 
 To prepare...
 
-`$ make
+```bash
+$ make
 
-$source ./run.sh`
+$source ./run.sh
+```
 
 `RIDFtoPLARAW.cc` : Generate root file containing TTree with raw MHTDC data of Plastic.
 
