@@ -1,12 +1,10 @@
 # macros_1 #
 First step of the analysis.
 
-To prepare...
-
+To run macros in this directory, at first you have to `make`, and `run.sh` will execute *RIDFtoPLARAW* and *RIDFtoPPACRAW*.
 ```bash
 $ make
-
-$source ./run.sh
+$ source ./run.sh
 ```
 
 `RIDFtoPLARAW.cc` : Generate root file containing TTree with raw MHTDC data of Plastic.
