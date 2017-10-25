@@ -25,6 +25,7 @@ void anaTOF_Runbyrun(){
   start=runNolist.front();
   stop=runNolist.back();
   TH1D* h_stof = new TH1D("h_stof","slew TOF;slew TOF (ns);counts/50ps",200,232,242);
+  TH1D* h_tof = new TH1D("h_tof","raw TOF;raw TOF (ns);counts/50ps",200,232,242);
   Double_t aoqrange[2]={2.1,2.2};
   if(beamtype==112){aoqrange[0]=2.2; aoqrange[1]=2.3;}
   TH1D* h_aoq = new TH1D("h_aoq","AoQ;AoQ;counts",400,aoqrange[0],aoqrange[1]);
@@ -61,6 +62,7 @@ void anaTOF_Runbyrun(){
       Double_t sTOF = beam->BigRIPSTOF_tof[0];
       
       h_stof->Fill(sTOF); 
+      h_tof->Fill(TOF); 
       h_aoq->Fill(beam->BigRIPSBeam_aoq[0]); 
       h_sqsumaoq->Fill(beam->BigRIPSBeam_aoq[0],beam->BigRIPSIC_fRawADCSqSum[2]); 
       h_sqsumstof->Fill(sTOF,beam->BigRIPSIC_fRawADCSqSum[2]); 
@@ -99,6 +101,11 @@ void anaTOF_Runbyrun(){
   h_stof->Draw();
   fg_tof->SetParameters(h_stof->GetMaximum(),h_stof->GetBinCenter(h_stof->GetMaximumBin()),0.15);
   h_stof->Fit("fg_tof","","");
+  
+  auto c00 = new TCanvas("c00","");
+  h_tof->Draw();
+  fg_tof->SetParameters(h_tof->GetMaximum(),h_tof->GetBinCenter(h_tof->GetMaximumBin()),0.15);
+  h_tof->Fit("fg_tof","","");
 
   auto c1 = new TCanvas("c1","");
   auto g_tof = new TGraph(runnum.size());

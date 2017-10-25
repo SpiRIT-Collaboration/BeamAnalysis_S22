@@ -134,15 +134,22 @@ int main(int argc, char *argv[]){
   auto bdcProj = new TBDCProjection();
   bdcProj->setBeam(runNo);
     
-  Double_t zedcal[2]={};
+  Double_t zedcal[2]={}, betacal[2]={};
   std::ifstream f_iccal;
-  if(runNo>=2174&&runNo<=2509)
+  std::ifstream f_betacal;
+  if(runNo>=2174&&runNo<=2509){
     f_iccal.open(anapath+"macros_3/supplemental/icCalibration_108.txt",std::ios::in);
-  else if(runNo>=2520&&runNo<=2653)
+    f_betacal.open(anapath+"macros_3/supplemental/betaCalibration_108.txt",std::ios::in);
+  }
+  else if(runNo>=2520&&runNo<=2653){
     f_iccal.open(anapath+"macros_3/supplemental/icCalibration_112.txt",std::ios::in);
+    f_betacal.open(anapath+"macros_3/supplemental/betaCalibration_112.txt",std::ios::in);
+  }
   
   f_iccal >> zedcal[0] >> zedcal[1];
+  f_betacal >> betacal[0] >> betacal[1];
   f_iccal.close();
+  f_betacal.close();
   
   double end_projection_z=-592.644;//////mid target = -592.644, start pad plane =-580.4, end of pad plane = 763.6
 
@@ -160,11 +167,24 @@ int main(int argc, char *argv[]){
     
     beta37 = beam->BigRIPSBeam_beta[0];
     aoq    = beam->BigRIPSBeam_aoq[0];
-    Double_t aoq1 = beam->BigRIPSBeam_aoq[2];
-    if(!(aoq<3&&aoq>1)&&(aoq1<3&&aoq1>1)){
-      beta37 = beam->BigRIPSBeam_beta[2];
-      aoq = aoq1;
-    }
+      
+    // if F3 tracking unavailable
+    // TOF = L35/beta35/c + L57/beta57/c
+    //     = L35/(a*beta57+b)/c + L57/beta57/c
+    Double_t brho2 = beam->BigRIPSRIPS_brho[1];
+    Double_t ftime = beam->BigRIPSTOF_tof[0];
+    Double_t fl1 = beam->BigRIPSTOF_ulength[0];
+    Double_t fl2 = beam->BigRIPSTOF_dlength[0];
+    Double_t clight = 299.792458; // mm/nsec
+    Double_t mnucleon = 931.49432;
+
+    Double_t rbeta2_F57 = ((fl1+betacal[1]*fl2-betacal[0]*clight*ftime)+TMath::Sqrt(pow(fl1+betacal[1]*fl2-betacal[0]*clight*ftime,2)+4.*betacal[0]*betacal[1]*clight*ftime*fl2))/(2.*betacal[1]*clight*ftime);
+    Double_t gammab = 1/sqrt(1-pow(rbeta2_F57,2));
+    Double_t aoq_F57 = brho2*clight/mnucleon/rbeta2_F57/gammab;
+    
+    if(beam->BigRIPSFocalPlane_X[3]==-99999&&beam->BigRIPSFocalPlane_X[5]!=-99999&&beam->BigRIPSFocalPlane_X[7]!=-99999)
+      {beta37=rbeta2_F57; aoq=aoq_F57;} 
+    
     Double_t ionpair = beam->BigRIPSIC_ionpair[2];
     Double_t de_v    = TMath::Log(ionpair*beta37*beta37) - TMath::Log(1-beta37*beta37) - beta37*beta37;
     z = zedcal[0]+zedcal[1]*TMath::Sqrt(asqsum/de_v)*beta37;

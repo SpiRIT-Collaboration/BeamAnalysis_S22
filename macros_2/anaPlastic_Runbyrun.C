@@ -1,14 +1,11 @@
-#include "class/BeamRaw.h"
-
 Bool_t isFileLoaded=kFALSE;
 const TString planame[4]={"F3","F7","F13-1","F13-2"}; 
 const Int_t plaid[4]={0,2,3,4}; 
 std::vector<Int_t> runNolist;
-const TString anapath = "/home/s015/exp/exp1605_s015/anaroot/users/108Sn_analysis/BeamAnalysis/mkana/";
-//const TString datapath=anapath+"rootfile/data/";
-const TString datapath=anapath+"rootfile/raw/";
+const TString anapath = "/home/s015/exp/exp1605_s015/anaroot/users/S22_analysis/";
+const TString datapath=anapath+"rootfiles/rawdata/";
 
-const Int_t beamtype=112;
+const Int_t beamtype=108;
 
 void loadFiles(Int_t bt){
   

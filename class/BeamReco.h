@@ -415,6 +415,7 @@ public :
    virtual void     InitPPACeff();
    virtual void     InitRecoeff();
    virtual void     InitBetaRes();
+   virtual void     InitBetaDif();
    virtual void     InitRawPID();
    virtual void     InitCombineTree();
 

@@ -7,7 +7,7 @@ const TString datapath=anapath+"rootfiles/rawdata/";
 
 const Int_t beamtype=108;
 // use 0~3 for corresponding PMT behaviors
-const Int_t datatype=4;
+const Int_t datatype=3;
 
 void loadFiles(Int_t);
 void makeQDCPedestal();
