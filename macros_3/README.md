@@ -1,4 +1,9 @@
 # macros_3 #
+Third step of the analysis, reconstruct the atomic number and mass to charge ratio of the beam isotope.
+
+Same as **macros_1** and **macros_2**, macros here needs partly reconstructed data.
+`RIDFtoROOT_S22.cc` generates root file with such information.
+
 
 `RIDFtoROOT_S22.cc` : Generate root file with calibrated data and reconstructed beta and A/Q.
 
