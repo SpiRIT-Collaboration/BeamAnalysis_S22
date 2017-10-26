@@ -7,3 +7,5 @@
 `anaPPACTSumGate.C` : Obtain TSum gate parameter for each PPAC.
 
 `anaPlasticSlewing.C` : Make ADC-TDC correlation histogram and get slewing correction parameter for plastics.
+
+`ana[Detector]_Runbyrun.C` : See the detector stability for each run.

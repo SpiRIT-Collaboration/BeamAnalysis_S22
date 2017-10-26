@@ -1,9 +1,12 @@
 # macros_1 #
 First step of the analysis.
 
-To run macros in this directory, at first you have to `make`, and execute `run.sh` which runs *RIDFtoPLARAW* and *RIDFtoPPACRAW* to make root file of S22 experiment.
+To run macros in this directory, at first you have to `make`, and execute `run.sh` which runs *RIDFtoPLARAW* and *RIDFtoPPACRAW*.
+Each code will generate root files which contain raw MHTDC data for Plastics and PPACs respectively.
+Rocation of root files are ../rootfiles/plastic and ../rootfiles/ppac. So,
 ```bash
 $ make
+$ cd ../; mkdir -p rootfiles/plastic; mkdir -p rootfiles/ppac; cd macros_1
 $ source ./run.sh
 ```
 
