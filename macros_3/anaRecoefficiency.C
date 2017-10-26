@@ -14,6 +14,12 @@ void anaRecoefficiency(){
   TVectorD run(runNolist.size()), AoqGood[2];
   for(Int_t i=0; i<2; i++) AoqGood[i].ResizeTo(runNolist.size());
   
+  Double_t betacal[2]={};
+  std::ifstream f_betacal;
+  f_betacal.open(Form(anapath+"macros_3/supplemental/betaCalibration_%d.txt",beamtype),std::ios::in);
+  f_betacal >> betacal[0] >> betacal[1];
+  f_betacal.close();
+  
   Int_t count_run=0;
   for(auto runNo: runNolist){
     std::cout<<"RUN"<<runNo<<std::endl; 
@@ -26,9 +32,27 @@ void anaRecoefficiency(){
     Int_t count_evnum=beam->GetEntries();
     for(Int_t i=0; i<beam->GetEntries(); i++){
       beam->GetEntry(i);
-      if(beam->BigRIPSBeam_aoq[0]>=1&&beam->BigRIPSBeam_aoq[0]<=3) count_AoqGood[0]++;
-      if((beam->BigRIPSBeam_aoq[0]>=1&&beam->BigRIPSBeam_aoq[0]<=3)
-        ||(beam->BigRIPSBeam_aoq[2]>=1&&beam->BigRIPSBeam_aoq[2]<=3)) count_AoqGood[1]++;
+      Double_t aoq = beam->BigRIPSBeam_aoq[0];
+      if(aoq>=1&&aoq<=3) count_AoqGood[0]++;
+    
+      // if F3 tracking unavailable
+      // TOF = L35/beta35/c + L57/beta57/c
+      //     = L35/(a*beta57+b)/c + L57/beta57/c
+      Double_t brho2 = beam->BigRIPSRIPS_brho[1];
+      Double_t ftime = beam->BigRIPSTOF_tof[0];
+      Double_t fl1 = beam->BigRIPSTOF_ulength[0];
+      Double_t fl2 = beam->BigRIPSTOF_dlength[0];
+      Double_t clight = 299.792458; // mm/nsec
+      Double_t mnucleon = 931.49432;
+
+      Double_t rbeta2_F57 = ((fl1+betacal[1]*fl2-betacal[0]*clight*ftime)+TMath::Sqrt(pow(fl1+betacal[1]*fl2-betacal[0]*clight*ftime,2)+4.*betacal[0]*betacal[1]*clight*ftime*fl2))/(2.*betacal[1]*clight*ftime);
+      Double_t gammab = 1/sqrt(1-pow(rbeta2_F57,2));
+      Double_t aoq_F57 = brho2*clight/mnucleon/rbeta2_F57/gammab;
+      // apply beta2_F57 only when F3 is dead and F5, F7 are alive.
+      if(beam->BigRIPSFocalPlane_X[3]==-99999&&beam->BigRIPSFocalPlane_X[5]!=-99999&&beam->BigRIPSFocalPlane_X[7]!=-99999)
+        aoq=aoq_F57;
+      if(aoq>=1&&aoq<=3) count_AoqGood[1]++;
+    
     }
     
     run(count_run)=runNo; 
@@ -42,13 +66,15 @@ void anaRecoefficiency(){
   TGraph* g[2]; auto mg = new TMultiGraph("mg","");
   for(Int_t i=0; i<2; i++){
     g[i] = new TGraph(run,AoqGood[i]);
-    g[i]->SetMarkerColor(3);
-    g[i]->SetLineColor(3);
+    g[i]->SetMarkerColor(3+i);
+    g[i]->SetLineColor(3+i);
     g[i]->SetMarkerStyle(8);
     mg->Add(g[i]);
   }
   auto c = new TCanvas("c");
-  g[1]->Draw("APL"); 
+  mg->Draw("APL"); 
+  mg->GetYaxis()->SetRangeUser(40,100);
+  c->SetGridy();
 
 }
 

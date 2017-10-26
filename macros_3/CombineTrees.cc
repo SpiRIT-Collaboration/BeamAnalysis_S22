@@ -181,7 +181,7 @@ int main(int argc, char *argv[]){
     Double_t rbeta2_F57 = ((fl1+betacal[1]*fl2-betacal[0]*clight*ftime)+TMath::Sqrt(pow(fl1+betacal[1]*fl2-betacal[0]*clight*ftime,2)+4.*betacal[0]*betacal[1]*clight*ftime*fl2))/(2.*betacal[1]*clight*ftime);
     Double_t gammab = 1/sqrt(1-pow(rbeta2_F57,2));
     Double_t aoq_F57 = brho2*clight/mnucleon/rbeta2_F57/gammab;
-    
+    // apply beta2_F57 only when F3 is dead and F5, F7 are alive.
     if(beam->BigRIPSFocalPlane_X[3]==-99999&&beam->BigRIPSFocalPlane_X[5]!=-99999&&beam->BigRIPSFocalPlane_X[7]!=-99999)
       {beta37=rbeta2_F57; aoq=aoq_F57;} 
     
