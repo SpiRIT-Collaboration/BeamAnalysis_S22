@@ -16,6 +16,8 @@ Instruction for macros and parameter files to analyze BigRIPS detectors of the S
 
 **runinfo/** : List of run mainly on useless data
 
+**src_modified/** : Source codes which are modified from the default ones.
+
 ## Rough Analysis Flow
 1. Decode the ridf-format files into TTree with raw data containers of TClonesArray.
 1. Get the calibration or correction parameters by analyzing raw data.
