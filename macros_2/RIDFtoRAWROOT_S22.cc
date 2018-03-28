@@ -63,21 +63,21 @@ int main(int argc, char *argv[]){
     TArtBigRIPSParameters *bigripsParameters = TArtBigRIPSParameters::Instance();
     TString dbdir=anadir+"db/";
     Char_t* ppacdb = NULL;
-    if(runNo>=2174&&runNo<2195) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw0.xml");
-    else if((runNo>=2195&&runNo<2202)||(runNo>=2204&&runNo<2392)) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw1.xml");
-    else if(runNo>=2202&&runNo<2204) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw2.xml");
-    else if(runNo>=2392&&runNo<2395) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw3.xml");
-    else if((runNo>=2395&&runNo<2471)||(runNo>=2476&&runNo<2509)) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw4.xml");
-    else if(runNo>=2471&&runNo<2476) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw5.xml");
-    else if(runNo>=2520&&runNo<2530) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw6.xml");
-    else if(runNo>=2530&&runNo<2654) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.raw7.xml");
+    if(runNo>=2174&&runNo<2195) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2174-2194.xml");
+    else if((runNo>=2195&&runNo<2202)||(runNo>=2204&&runNo<2392)) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2195-2201_2204-2391.xml");
+    else if(runNo>=2202&&runNo<2204) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2202-2203.xml");
+    else if(runNo>=2392&&runNo<2395) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2392-2394.xml");
+    else if((runNo>=2395&&runNo<2471)||(runNo>=2476&&runNo<2509)) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2395-2470_2476-2509.xml");
+    else if(runNo>=2471&&runNo<2476) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2471-2475.xml");
+    else if(runNo>=2520&&runNo<2530) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2520-2529.xml");
+    else if(runNo>=2530&&runNo<2654) ppacdb = (Char_t*) Form(dbdir+"raw/BigRIPSPPAC.2530-2653.xml");
     Char_t* pladb = NULL;
-    if(runNo>=2174&&runNo<2195) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.raw0.xml");
-    else if((runNo>=2195&&runNo<2202)||(runNo>=2204&&runNo<2471)||(runNo>=2476&&runNo<2510)) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.raw1.xml");
-    else if(runNo>=2202&&runNo<2204) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.raw2.xml");
-    else if(runNo>=2471&&runNo<2476) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.raw3.xml");
-    else if(runNo>=2520&&runNo<2530) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.raw4.xml");
-    else if(runNo>=2530&&runNo<2654) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.raw5.xml");
+    if(runNo>=2174&&runNo<2195) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.2174-2194.xml");
+    else if((runNo>=2195&&runNo<2202)||(runNo>=2204&&runNo<2471)||(runNo>=2476&&runNo<2510)) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.2195-2201_2204-2470_2476-2509.xml");
+    else if(runNo>=2202&&runNo<2204) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.2202-2203.xml");
+    else if(runNo>=2471&&runNo<2476) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.2471-2475.xml");
+    else if(runNo>=2520&&runNo<2530) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.2520-2529.xml");
+    else if(runNo>=2530&&runNo<2654) pladb  = (Char_t*) Form(dbdir+"raw/BigRIPSPlastic.2530-2653.xml");
     Char_t* icdb   = (Char_t*) Form(dbdir+"raw/BigRIPSIC.0.xml");
     
     // Load each cal. parameter files.
