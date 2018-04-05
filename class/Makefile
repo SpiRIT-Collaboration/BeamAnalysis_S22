@@ -5,6 +5,8 @@ OBJ =
 #======= BEGIN CONFIGURATION =========
 
 # TClonesArray variables
+OBJ += BeamRaw.o
+OBJ += BeamReco.o
 OBJ += TBeamEnergy.o
 OBJ += TBDCProjection.o
 
@@ -12,10 +14,10 @@ OBJ += TBDCProjection.o
 
 SOFLAG =  -shared
 
-TARGET = libbdc.so
+TARGET = libclass.so
 HDR = $(OBJ:.o=.h)
 
-DICTSRC = .libbdc_dict.cc
+DICTSRC = .libclass_dict.cc
 DICTOBJ = $(DICTSRC:.cc=.o)
 DICTHDR = $(DICTSRC:.cc=.h)
 
@@ -42,4 +44,4 @@ $(DICTSRC): $(HDR) linkdef.h
 	rootcint -f $@ -c $^
 
 clean:
-	rm -f *.d *.o libbdc.so $(DICTOBJ) $(DICTSRC) $(DICTHDR)
+	rm -f *.d *.o libclass.so $(DICTOBJ) $(DICTSRC) $(DICTHDR)
