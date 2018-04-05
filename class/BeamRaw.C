@@ -18,6 +18,7 @@ BeamRaw::BeamRaw() {
 }
 
 BeamRaw::~BeamRaw() {
+  Clear();
 }
 
 Int_t BeamRaw::GetEntry(Long64_t entry) {
@@ -118,10 +119,10 @@ void BeamRaw::Init()
 }
 
 void BeamRaw::Clear(){
-
-  fChain->Clear();
-  delete fChain;
-  fChain = nullptr;
+  if (fChain) {
+    delete fChain;
+    fChain = nullptr;
+  }
 }
 
 

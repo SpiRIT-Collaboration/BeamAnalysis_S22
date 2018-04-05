@@ -18,6 +18,7 @@ BeamReco::BeamReco() {
 }
 
 BeamReco::~BeamReco() {
+  Clear();
 }
 
 Int_t BeamReco::GetEntry(Long64_t entry) {
@@ -233,10 +234,10 @@ void BeamReco::Init()
 }
 
 void BeamReco::Clear(){
-
-  fChain->Clear();
-  delete fChain;
-  fChain = nullptr;
+  if (fChain) {
+    delete fChain;
+    fChain = nullptr;
+  }
 }
 
 
