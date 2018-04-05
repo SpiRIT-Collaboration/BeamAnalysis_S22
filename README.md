@@ -16,7 +16,9 @@ Instruction for macros and parameter files to analyze BigRIPS detectors of the S
 
 **runinfo/** : List of run mainly on useless data
 
-**src_modified/** : Source codes which are modified from the default ones.
+**src_modified/** : Source codes which are modified from the default ones. (These are merged into [the SpiRIT ANAROOT](https://github.com/SpiRIT-Collaboration/anaroot/commit/f4b6ec282d46ba158a4019b8b8c7fd3daa34b8ff).)
+
+**matrix/** : Matrices for each beam line magnet.
 
 ## Rough Analysis Flow
 1. Decode the ridf-format files into TTree with raw data containers of TClonesArray.
